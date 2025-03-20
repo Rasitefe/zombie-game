@@ -88,11 +88,12 @@ Bu mesajı aldıysanız, artık **GitHub ile SSH bağlantısı kuruldu!**
 ---
 
 ### ** Git Kullanıcı Adı ve E-posta Tanımlama**
-Aşağıdaki komutlarla GitHub hesabınızı bağlayın:
+Aşağıdaki komutlarla GitHub hesabınızı bağlayın(tekrar yapıyorum garanti olması için):
 
 ```
-git config --global user.name "kullanıcı adın"
-git config --global user.email "senin_email@gmail.com"
+git config --global user.name "git kullanıcı adın"
+git config --global user.email "git email adresin@gmail.com"
+git config --global --list
 ```
 
 Bu ayarlar, commit'lerinizde isminiz ve e-posta adresinizin görünmesini sağlar.
