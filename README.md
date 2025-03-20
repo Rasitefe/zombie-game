@@ -1,5 +1,5 @@
 # Zombie Game - Git ve Python Ortam Kurulumu
-
+iklim çelebi 
 Bu proje **Python 3.11** sürümü ile çalışmaktadır. Çalıştırmadan önce gerekli bağımlılıkları yükleyerek ortamı hazırlamanız gerekmektedir.
 
 ---
