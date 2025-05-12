@@ -31,6 +31,16 @@ class MapEditor(QWidget):
         self.end_set = False
         self.setFixedSize(self.GRID_SIZE * self.CELL_SIZE, self.GRID_SIZE * self.CELL_SIZE)
 
+    def load_map(self, filename):
+        with open(filename, 'r') as f:
+            data = json.load(f)
+            if isinstance(data, list) and all(isinstance(row, list) for row in data):
+                self.grid = data
+                self.start_set = any(START in row for row in data)
+                self.end_set = any(END in row for row in data)
+                self.update()
+
+
     def paintEvent(self, event):
         qp = QPainter(self)
         for y in range(self.GRID_SIZE):
@@ -39,7 +49,6 @@ class MapEditor(QWidget):
                 qp.setBrush(COLORS[self.grid[y][x]])
                 qp.setPen(QPen(Qt.black, 1))
                 qp.drawRect(rect)
-        # Izgara çizgileri
         qp.setPen(QPen(Qt.gray, 1, Qt.DotLine))
         for i in range(self.GRID_SIZE + 1):
             qp.drawLine(i * self.CELL_SIZE, 0, i * self.CELL_SIZE, self.GRID_SIZE * self.CELL_SIZE)
@@ -50,7 +59,6 @@ class MapEditor(QWidget):
         y = event.y() // self.CELL_SIZE
         if 0 <= x < self.GRID_SIZE and 0 <= y < self.GRID_SIZE:
             if self.selected_tool == START:
-                # Sadece bir başlangıç noktası olsun
                 if self.start_set:
                     for row in self.grid:
                         for i in range(len(row)):
@@ -58,7 +66,6 @@ class MapEditor(QWidget):
                                 row[i] = EMPTY
                 self.start_set = True
             if self.selected_tool == END:
-                # Sadece bir bitiş noktası olsun
                 if self.end_set:
                     for row in self.grid:
                         for i in range(len(row)):
@@ -79,13 +86,13 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Harita Editörü')
-        # Tam ekran ve grid ayarı
         screen = QApplication.primaryScreen().geometry()
         grid_size = 40
         cell_size = min(screen.width(), screen.height()) // grid_size
         self.editor = MapEditor(grid_size, cell_size)
         self.init_ui()
         self.showFullScreen()
+
 
     def init_ui(self):
         main_layout = QVBoxLayout()
@@ -123,6 +130,15 @@ class MainWindow(QMainWindow):
         container.setLayout(main_layout)
         self.setCentralWidget(container)
         self.setFixedSize(container.sizeHint())
+
+        btn_load = QPushButton('Yükle')
+        btn_load.clicked.connect(self.load_map)
+        tool_layout.addWidget(btn_load)
+
+    def load_map(self):
+        filename, _ = QFileDialog.getOpenFileName(self, 'Harita Yükle', '', 'JSON Files (*.json)')
+        if filename:
+            self.editor.load_map(filename)
 
     def save_map(self):
         filename, _ = QFileDialog.getSaveFileName(self, 'Haritayı Kaydet', '', 'JSON Files (*.json)')
