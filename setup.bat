@@ -1,15 +1,15 @@
 @echo off
-echo [1/4] Sanal ortam etkinleştiriliyor...
+echo [1/4] Sanal ortam etkinleştiriliyor..
 call venv\Scripts\activate
 
-echo [2/4] PyInstaller kontrol ediliyor...
+echo [2/4] PyInstaller kontrol ediliyor..
 pip show pyinstaller >nul 2>&1
 if errorlevel 1 (
-    echo PyInstaller yüklü değil. Yükleniyor...
+    echo PyInstaller yüklü değil. Yükleniyor..
     pip install pyinstaller
 )
 
-echo [3/4] Eski derlemeler temizleniyor...
+echo [3/4] Eski derlemeler temizleniyor..
 rmdir /s /q build
 rmdir /s /q dist
 del /q zombie-game.spec
