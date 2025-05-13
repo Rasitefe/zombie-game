@@ -1,7 +1,7 @@
 import math
 import pygame
 import random
-
+from scripts.resource_path import resource_path
 from utils.constants import (
     RED, WHITE, BLACK, BULLET_DAMAGE, WALL_THICKNESS, ZOMBIE_CHASE_SPEED
 )
@@ -28,8 +28,8 @@ class Zombie:
         pygame.draw.circle(self.sprite, BLACK, (22, 20), 2)
 
         self.images = [
-            pygame.image.load("assets/PNG/Zombie/Poses/zombie_walk1.png").convert_alpha(),
-            pygame.image.load("assets/PNG/Zombie/Poses/zombie_walk2.png").convert_alpha()
+            pygame.image.load(resource_path("assets/PNG/Zombie/Poses/zombie_walk1.png")).convert_alpha(),
+            pygame.image.load(resource_path("assets/PNG/Zombie/Poses/zombie_walk2.png")).convert_alpha()
         ]
         self.image_index = 0
         self.animation_timer = 0

@@ -1,5 +1,6 @@
 import math
 import pygame
+from scripts.resource_path import resource_path
 from utils.constants import PLAYER_MAX_HEALTH, BLUE, WHITE, BLACK, WIDTH, HEIGHT
 from classes.bullet import Bullet
 
@@ -26,7 +27,7 @@ class Player:
         pygame.draw.circle(self.sprite, BLACK, (32, 15), 2)
         pygame.draw.circle(self.sprite, BLACK, (32, 25), 2)
 
-        original_gun = pygame.image.load("assets/PNG/Gun/gun.png").convert()
+        original_gun = pygame.image.load(resource_path("assets/PNG/Gun/gun.png")).convert()
         original_gun = pygame.transform.scale(original_gun, (60, 20))
 
         original_gun = original_gun.convert_alpha()
@@ -40,8 +41,8 @@ class Player:
         self.gun_sprite = original_gun
 
         self.images = [
-            pygame.image.load("assets/PNG/Player/Poses/player_walk1.png").convert_alpha(),
-            pygame.image.load("assets/PNG/Player/Poses/player_walk2.png").convert_alpha()
+            pygame.image.load(resource_path("assets/PNG/Player/Poses/player_walk1.png")).convert_alpha(),
+            pygame.image.load(resource_path("assets/PNG/Player/Poses/player_walk2.png")).convert_alpha()
         ]
         self.image_index = 0
         self.animation_timer = 0

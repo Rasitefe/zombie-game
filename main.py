@@ -1,7 +1,8 @@
 import pygame
-import sys
 import math
 import json
+import sys
+from scripts.resource_path import resource_path
 from classes.player import Player
 from classes.zombie import Zombie
 from utils.constants import (
@@ -25,9 +26,9 @@ from utils.constants import (
 
 
 def load_map(filename):
-    with open(filename, 'r') as f:
-        grid = json.load(f)
-    return grid
+    with open(resource_path(filename), 'r') as f:
+        return json.load(f)
+
 
 def get_walls_and_doors_from_grid(grid, cell_size):
     walls = []
@@ -133,11 +134,13 @@ def main():
         grid_size = len(grid)
         cell_size = 64
 
-        wall_image = pygame.image.load(r'assets\PNG\background\wall.jpg')
+        wall_image = pygame.image.load(resource_path('assets/PNG/background/wall.jpg'))
         wall_image = pygame.transform.scale(wall_image, (cell_size, cell_size))
-        floor_image = pygame.image.load(r'assets\PNG\background\floor.jpg')
+
+        floor_image = pygame.image.load(resource_path('assets/PNG/background/floor.jpg'))
         floor_image = pygame.transform.scale(floor_image, (cell_size, cell_size))
-        door_image = pygame.image.load(r'assets\PNG\background\door.jpg')
+
+        door_image = pygame.image.load(resource_path('assets/PNG/background/door.jpg'))
         door_image = pygame.transform.scale(door_image, (cell_size, cell_size))
 
         walls, doors = get_walls_and_doors_from_grid(grid, cell_size)
