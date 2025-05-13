@@ -49,3 +49,6 @@ YELLOW     = (255, 255, 0)
 GRAY       = (100, 100, 100)
 BROWN      = (139, 69, 19)
 DARK_BROWN = (101, 67, 33)
+# Bu kod, bir oyun için çeşitli ayarları ve sabitleri .env dosyasından yükler. 
+# dotenv kütüphanesi kullanılarak ortam değişkenleri (.env dosyasındaki değerler) Python programına aktarılır.
+#  Bu sayede oyun ayarları dışarıdan yapılandırılabilir. 

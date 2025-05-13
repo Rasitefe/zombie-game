@@ -29,10 +29,15 @@ def load_map(filename):
     with open(resource_path(filename), 'r') as f:
         return json.load(f)
 
+#Bu fonksiyon, belirtilen dosya yolundan harita verisini (map1.json, map2.json) yükler.
+#Harita JSON formatında tanımlanmış olmalı ve her hücrede;
+#duvarlar, kapılar, zombiler, başlangıç ve bitiş noktaları gibi öğeler bulunur.
+
 
 def get_walls_and_doors_from_grid(grid, cell_size):
     walls = []
     doors = []
+    # Haritadaki her hücreyi kontrol ederek duvarları ve kapıları ayırır.
     grid_size = len(grid)
     for y in range(grid_size):
         for x in range(grid_size):
@@ -48,6 +53,8 @@ def get_entities_from_grid(grid, cell_size):
     zombies = []
     start = None
     end = None
+    #None
+    # Haritada zombi, başlangıç ve bitiş noktalarını bulur.
     grid_size = len(grid)
     for y in range(grid_size):
         for x in range(grid_size):
@@ -72,11 +79,12 @@ def is_in_open_door(x, y, doors):
 def show_menu(screen, font, title, options):
     selected = 0
     clock = pygame.time.Clock()
+    # ana menu ve secenekler gösterilir
     while True:
         screen.fill((0, 0, 0))
         title_text = font.render(title, True, (255, 255, 255))
         screen.blit(title_text, (WIDTH // 2 - title_text.get_width() // 2, 150))
-
+         # Seçenekler eklenir, seçilen seçenek renklendirilir
         option_rects = []
         for i, option in enumerate(options):
             color = (255, 255, 0) if i == selected else (255, 255, 255)
@@ -118,6 +126,7 @@ def main():
         return
 
     while current_level < len(maps):
+        #   # Oyun döngüsü içinde harita yüklenir ve oyuncu hareket eder
         map_file = maps[current_level]
         current_level += 1
         win = False
@@ -159,6 +168,7 @@ def main():
         running = True
 
         while running:
+            #Oyun sırasında tuşlar kontrol edilir, oyuncu hareket eder, mermiler atılır
             current_time = pygame.time.get_ticks()
 
             for event in pygame.event.get():

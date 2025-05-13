@@ -5,6 +5,8 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("player-cam")
+# Pygame başlatılır ve ekran boyutu 800x600 piksel olarak ayarlanır. 
+# Başlık da "player-cam" olarak belirlenir
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -26,7 +28,7 @@ while running:
     dt = clock.tick(FPS)
     screen.fill((30, 30, 30))
 
-    keys = pygame.key.get_pressed()
+    keys = pygame.key.get_pressed()# hangi tusların basılı olduğunu kontrol eder
     moving = False
 
     if keys[pygame.K_w]:
@@ -41,6 +43,8 @@ while running:
     if keys[pygame.K_d]:
         player_pos.x += player_speed
         moving = True
+
+        # basılan tuslara göre konum güncellemesi yapar
 
     if moving:
         animation_timer += dt
